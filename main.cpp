@@ -88,33 +88,20 @@ int kthLargest(TreeNode* root, int k, int& count) {
     return kthLargest(root->left, k, count);
 }
 
-// Parse input format: root = [1,2,3], cnt = 2
+// Parse input format: 8 integers, each on separate lines
 void parseInput(vector<int>& rootValues, int& cnt) {
-    string line;
-    getline(cin, line);
+    int value;
     
-    // Extract root array
-    size_t rootStart = line.find('[');
-    size_t rootEnd = line.find(']');
-    if (rootStart != string::npos && rootEnd != string::npos) {
-        string rootStr = line.substr(rootStart + 1, rootEnd - rootStart - 1);
-        stringstream ss(rootStr);
-        string token;
-        
-        while (getline(ss, token, ',')) {
-            // Remove whitespace and convert to int
-            token.erase(remove_if(token.begin(), token.end(), ::isspace), token.end());
-            if (!token.empty()) {
-                rootValues.push_back(stoi(token));
-            }
+    // Read first 7 integers for BST nodes
+    for (int i = 0; i < 7; i++) {
+        if (cin >> value) {
+            rootValues.push_back(value);
         }
     }
     
-    // Extract cnt
-    size_t cntStart = line.find("cnt =");
-    if (cntStart != string::npos) {
-        string cntStr = line.substr(cntStart + 6);
-        cnt = stoi(cntStr);
+    // Read the last integer as cnt
+    if (cin >> cnt) {
+        // Successfully read cnt
     }
 }
 
